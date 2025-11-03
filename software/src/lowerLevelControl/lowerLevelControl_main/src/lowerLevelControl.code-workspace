@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "lowerLevelControl",
+			"path": "../../../../Work/deskCobot/software/src/lowerLevelControl"
+		},
+		{
+			"name": "lowerLevelControl_main",
+			"path": ".."
+		},
+		{
+			"name": "lowerLevelControl",
+			"path": "../../lowerLevelControl"
+		}
+	],
+	"settings": {}
+}
