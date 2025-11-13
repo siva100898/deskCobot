@@ -16,6 +16,23 @@ auto delay_mainCycle = 0ms;
 steady_clock::time_point lastCycle;
 constexpr auto watchDogThreshold = 50ms;
 
+struct dhParameters {
+  float linkLength ;
+  float linkTwist ; 
+  float jointAngle ; 
+  float linkOffset ;  
+};
+
+std::array<dhParameters, 6> dhTable {{
+  {0, M_PI_2 , 40.0f , 0.0f}, //Link 1 
+  {50.0f, M_PI , 40.0f , 0.0f}, //Link 2 
+  {50.0f, M_PI , 40.0f , 0.0f}, //Link 3 
+  {0, M_PI_2 , 50.0f, 0.0f}, //Link 4 
+  {0, M_PI_2 , 0.0f , 0.0f}, //Link 5 
+  {0, M_PI_2 , 50.0f , 0.0f}, //Link 6 
+
+}};
+
 void setup() {
   Serial.begin(115200);
 
@@ -24,8 +41,8 @@ void setup() {
   }
 
   run = true;
-  Serial.printf("C++ version macro: %ld\n", (long)__cplusplus);
-  Serial.println("Setup is running!");
+  Serial.printf("[MAIN] : C++ version macro: %ld\n", (long)__cplusplus);
+  Serial.println("[MAIN] : Setup Done");
 }
 
 void loop() {
@@ -47,9 +64,9 @@ void loop() {
   
 
   if (timeElapsed > watchDogThreshold) {
-    Serial.printf("[UTILITY] Time elapsed : %lld ms\n",
+    Serial.printf("[UTILITY] : Time elapsed : %lld ms\n",
       static_cast<long long>(timeElapsed_ms.count()));
-    Serial.println("[WATCHDOG] Watchdog breach!");
-    delay_mainCycle = 0ms;  // ✅ properly resets
+    Serial.println("[WATCHDOG] : Watchdog breach!");
+    delay_mainCycle = 0ms;  
   }
 }
